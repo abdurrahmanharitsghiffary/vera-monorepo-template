@@ -8,6 +8,7 @@ A full-stack monorepo starter **specialized for Next.js + Bun/Elysia** stacks, b
 
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
+- [Naming Conventions](#naming-conventions)
 - [Workspace Packages](#workspace-packages)
 - [Getting Started](#getting-started)
 - [NX: Running Tasks](#nx-running-tasks)
@@ -20,7 +21,7 @@ A full-stack monorepo starter **specialized for Next.js + Bun/Elysia** stacks, b
 
 ## Tech Stack
 
-### Frontend — `apps/vera-ai`
+### Frontend — `@vera/vera-ai`
 
 | Technology | Version | Role |
 | --- | --- | --- |
@@ -29,7 +30,7 @@ A full-stack monorepo starter **specialized for Next.js + Bun/Elysia** stacks, b
 | [Tailwind CSS](https://tailwindcss.com) | 4.x | Utility-first CSS (v4 with CSS-first config) |
 | [Shadcn UI](https://ui.shadcn.com) | 4.x | Accessible component primitives |
 
-### Backend — `apps/vera-api`
+### Backend — `@vera/vera-api`
 
 | Technology | Version | Role |
 | --- | --- | --- |
@@ -59,36 +60,37 @@ Inspired by [Bulletproof React](https://github.com/alan2207/bulletproof-react). 
 vera-monorepo/
 │
 ├── apps/                          # Deployable applications
-│   ├── vera-ai/                   # Next.js frontend (App Router)
+│   ├── vera-ai/                   # @vera/vera-ai — Next.js frontend (App Router)
 │   │   ├── src/
 │   │   │   └── app/               # Next.js App Router pages & layouts
 │   │   ├── public/                # Static assets
 │   │   ├── next.config.js
 │   │   └── postcss.config.js
 │   │
-│   ├── vera-ai-e2e/               # Playwright E2E tests for vera-ai
+│   ├── vera-ai-e2e/               # @vera/vera-ai-e2e — Playwright E2E tests
 │   │
-│   └── vera-api/                  # Elysia API (runs on Bun)
+│   └── vera-api/                  # @vera/vera-api — Elysia API (runs on Bun)
 │       └── src/
 │           └── index.ts           # API entrypoint
 │
 ├── libs/                          # Shared workspace libraries
-│   ├── ui/                        # @vera/web-ui
-│   │   └── src/
-│   │       ├── lib/               # Shadcn components (50+ components)
-│   │       └── styles/            # globals.css (Tailwind v4 entry)
+│   ├── web/                       # Frontend-specific libraries
+│   │   ├── ui/                    # @vera/web-ui — Shadcn components + global styles
+│   │   │   └── src/
+│   │   │       ├── lib/           # Shadcn components (50+ components)
+│   │   │       └── styles/        # globals.css (Tailwind v4 entry)
+│   │   │
+│   │   ├── hooks/                 # @vera/react-hooks — Shared React hooks
+│   │   │   └── src/lib/
+│   │   │
+│   │   └── lib/                   # @vera/web-lib — Shared business logic helpers
+│   │       └── src/lib/
 │   │
-│   ├── hooks/                     # @vera/react-hooks
-│   │   └── src/lib/               # Shared React hooks
-│   │
-│   ├── utils/                     # @vera/common-utils
-│   │   └── src/lib/               # Shared utility functions (cn, etc.)
-│   │
-│   └── lib/                       # @vera/web-lib
-│       └── src/lib/               # Shared business logic helpers
+│   └── utils/                     # @vera/common-utils — Framework-agnostic utilities
+│       └── src/lib/
 │
 ├── tools/                         # Workspace tooling
-│   └── elysia/                    # Custom NX plugin for Elysia apps
+│   └── elysia/                    # @vera/elysia-tooling — Custom NX plugin for Elysia apps
 │       ├── src/
 │       │   ├── executors/         # Custom NX executors
 │       │   └── plugins/           # NX project graph plugin
@@ -127,15 +129,30 @@ apps/vera-ai/src/
 
 ---
 
+## Naming Conventions
+
+All packages are scoped under `@vera`. The package name suffix follows a prefix convention based on the project type:
+
+| Type | Prefix | Example | Path |
+| --- | --- | --- | --- |
+| Applications | `vera-` | `@vera/vera-ai`, `@vera/vera-api` | `apps/<name>` |
+| Frontend libraries | `web-` | `@vera/web-ui`, `@vera/web-lib` | `libs/web/<name>` |
+| React-specific libs | `react-` | `@vera/react-hooks` | `libs/web/<name>` |
+| Server libraries | `server-` | `@vera/server-auth` | `libs/server/<name>` |
+| Common (shared) libs | `common-` | `@vera/common-utils` | `libs/<name>` |
+| Tooling / plugins | descriptive | `@vera/elysia-tooling` | `tools/<name>` |
+
+---
+
 ## Workspace Packages
 
 | Package | Path | Import |
 | --- | --- | --- |
-| UI Components | `libs/ui` | `@vera/web-ui` or `@vera/web-ui/<component>` |
-| Global Styles | `libs/ui/src/styles` | `@vera/web-styles/globals.css` |
-| React Hooks | `libs/hooks` | `@vera/react-hooks` |
+| UI Components | `libs/web/ui` | `@vera/web-ui` or `@vera/web-ui/<component>` |
+| Global Styles | `libs/web/ui/src/styles` | `@vera/web-ui/globals.css` |
+| React Hooks | `libs/web/hooks` | `@vera/react-hooks` |
+| Shared Logic | `libs/web/lib` | `@vera/web-lib` |
 | Utilities | `libs/utils` | `@vera/common-utils` |
-| Shared Logic | `libs/lib` | `@vera/web-lib` |
 
 All packages resolve to source files in development via the `@vera-monorepo/source` custom condition in `tsconfig.base.json` — no build step needed during local dev.
 
@@ -159,13 +176,13 @@ pnpm install
 
 ```sh
 # Frontend (Next.js)
-pnpm nx dev vera-ai
+pnpm nx dev @vera/vera-ai
 
 # Backend API (Elysia + Bun)
-pnpm nx dev vera-api
+pnpm nx dev @vera/vera-api
 
 # Both in parallel
-pnpm nx run-many -t dev -p vera-ai,vera-api
+pnpm nx run-many -t dev -p @vera/vera-ai,@vera/vera-api
 ```
 
 ---
@@ -186,7 +203,7 @@ All tasks run through NX. **Never** call underlying tools (e.g. `next build`, `v
 | `pnpm nx test <project>` | Run unit tests |
 | `pnpm nx lint <project>` | Run ESLint |
 | `pnpm nx typecheck <project>` | Run TypeScript type checking |
-| `pnpm nx e2e <project>-e2e` | Run E2E tests |
+| `pnpm nx e2e @vera/vera-ai-e2e` | Run E2E tests |
 
 ### Run across multiple projects
 
@@ -195,7 +212,7 @@ All tasks run through NX. **Never** call underlying tools (e.g. `next build`, `v
 pnpm nx run-many -t build
 
 # Run a target on specific projects
-pnpm nx run-many -t test -p vera-ai,@vera/web-ui
+pnpm nx run-many -t test -p @vera/vera-ai,@vera/web-ui
 
 # Run only on projects affected by current changes (great for CI)
 pnpm nx affected -t build
@@ -206,7 +223,7 @@ pnpm nx affected -t lint
 ### Show available targets for a project
 
 ```sh
-pnpm nx show project vera-ai
+pnpm nx show project @vera/vera-ai
 pnpm nx show project @vera/web-ui
 ```
 
@@ -227,20 +244,23 @@ Generators scaffold code consistently. Always use them instead of creating files
 ### Applications
 
 ```sh
-# Generate a new Next.js app
-pnpm nx g @nx/next:app apps/<name>
+# Generate a new Next.js app (vera- prefix)
+pnpm nx g @nx/next:app apps/vera-<name>
 
 # Generate a new Node app (for additional API services)
-pnpm nx g @nx/node:app apps/<name>
+pnpm nx g @nx/node:app apps/vera-<name>
 ```
 
 ### Libraries
 
 ```sh
-# Generate a new React library (Vite, Vitest)
-pnpm nx g @nx/react:lib libs/<name>
+# Generate a new frontend React library (web- or react- prefix, inside libs/web/)
+pnpm nx g @nx/react:lib libs/web/<name>
 
-# Generate a new TypeScript library (no framework)
+# Generate a new server-side library (server- prefix, inside libs/server/)
+pnpm nx g @nx/js:lib libs/server/<name>
+
+# Generate a new framework-agnostic common library (common- prefix)
 pnpm nx g @nx/js:lib libs/<name>
 ```
 
@@ -248,12 +268,12 @@ pnpm nx g @nx/js:lib libs/<name>
 
 ```sh
 # Generate a React component inside a library
-pnpm nx g @nx/react:component --project=<lib-name> --name=<ComponentName>
+pnpm nx g @nx/react:component --project=@vera/web-ui --name=<ComponentName>
 
 # Add Shadcn components to the UI library
-pnpm nx g @nx/react:component --project=ui --directory=src/lib --name=<name>
+pnpm nx g @nx/react:component --project=@vera/web-ui --directory=src/lib --name=<name>
 
-# Or use the shadcn CLI directly (components land in libs/ui/src/lib)
+# Or use the shadcn CLI directly (components land in libs/web/ui/src/lib)
 pnpm shadcn add <component-name>
 ```
 
@@ -261,7 +281,7 @@ pnpm shadcn add <component-name>
 
 The workspace is pre-configured for Shadcn via `components.json` at the repository root. The configuration is compatible with any component source — the official [shadcn/ui registry](https://ui.shadcn.com/docs/components), third-party registries, and community registries all work out of the box.
 
-> **Always run the shadcn CLI from the workspace root.** The `components.json` at the root tells the CLI where to place files (`libs/ui/src/lib/`), which aliases to use, and which Tailwind config applies. Running it from inside a sub-directory will miss this config.
+> **Always run the shadcn CLI from the workspace root.** The `components.json` at the root tells the CLI where to place files (`libs/web/ui/src/lib/`), which aliases to use, and which Tailwind config applies. Running it from inside a sub-directory will miss this config.
 
 ```sh
 # Add a single component (official registry)
@@ -277,7 +297,7 @@ pnpm shadcn add --all
 pnpm shadcn add https://ui.aceternity.com/registry/moving-cards.json
 ```
 
-Components land in `libs/ui/src/lib/` and are immediately importable via `@vera/web-ui/<component-name>`.
+Components land in `libs/web/ui/src/lib/` and are immediately importable via `@vera/web-ui/<component-name>`.
 
 See the [shadcn CLI docs](https://ui.shadcn.com/docs/cli) and [registry docs](https://ui.shadcn.com/docs/registry) for the full list of options.
 
@@ -285,7 +305,7 @@ See the [shadcn CLI docs](https://ui.shadcn.com/docs/cli) and [registry docs](ht
 
 ```sh
 # Playwright E2E (for Next.js apps)
-pnpm nx g @nx/playwright:configuration --project=<app-name>
+pnpm nx g @nx/playwright:configuration --project=@vera/<app-name>
 ```
 
 ### List all available generators
@@ -313,7 +333,7 @@ NX caches task outputs automatically. Cached tasks show `[local cache]` in outpu
 pnpm nx reset
 
 # Skip cache for a single run
-pnpm nx build vera-ai --skip-nx-cache
+pnpm nx build @vera/vera-ai --skip-nx-cache
 ```
 
 ### Project info & dependencies
@@ -323,7 +343,7 @@ pnpm nx build vera-ai --skip-nx-cache
 pnpm nx show projects
 
 # Show project details and all targets
-pnpm nx show project <name> --web
+pnpm nx show project @vera/vera-ai --web
 
 # Check what is affected by changes on this branch
 pnpm nx show projects --affected
@@ -346,7 +366,7 @@ pnpm nx g ci-workflow
 
 ## Elysia Tooling
 
-The workspace ships with a custom Nx plugin at `tools/elysia/` that auto-wires Elysia apps into the Nx task graph — no manual `project.json` target configuration needed.
+The workspace ships with a custom Nx plugin at `tools/elysia/` (`@vera/elysia-tooling`) that auto-wires Elysia apps into the Nx task graph — no manual `project.json` target configuration needed.
 
 The plugin is **modelled after `@nx/next/plugin`**: it implements the `CreateNodesV2` API, globs for `package.json` files, detects projects that depend on `elysia`, and injects the three standard targets automatically.
 
@@ -406,7 +426,7 @@ import { Button } from '@vera/web-ui/button'
 import { Card, CardContent } from '@vera/web-ui/card'
 
 // Global styles
-import '@vera/web-styles/globals.css'
+import '@vera/web-ui/globals.css'
 
 // Utilities
 import { cn } from '@vera/common-utils'
@@ -417,4 +437,3 @@ import { useIsMobile } from '@vera/react-hooks'
 // Shared business logic
 import { something } from '@vera/web-lib'
 ```
-
