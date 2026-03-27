@@ -1,6 +1,6 @@
 # Vera Monorepo
 
-A full-stack monorepo starter built with **NX**, **Next.js 16**, **Elysia** (Bun), **Drizzle ORM**, and **Shadcn UI** — wired up and ready to ship.
+A full-stack monorepo starter **specialized for Next.js + Bun/Elysia** stacks, built with **NX**, **Next.js 16**, **Elysia** (Bun), **Drizzle ORM**, and **Shadcn UI** — wired up and ready to ship.
 
 ---
 
@@ -14,8 +14,7 @@ A full-stack monorepo starter built with **NX**, **Next.js 16**, **Elysia** (Bun
 - [NX: Generators](#nx-generators)
 - [NX: Useful Commands](#nx-useful-commands)
 - [Path Aliases](#path-aliases)
-- [UI Components (Shadcn)](#ui-components-shadcn)
-- [Code Style & Conventions](#code-style--conventions)
+- [Elysia Tooling](#elysia-tooling)
 
 ---
 
@@ -29,9 +28,6 @@ A full-stack monorepo starter built with **NX**, **Next.js 16**, **Elysia** (Bun
 | [React](https://react.dev) | 19.x | UI library |
 | [Tailwind CSS](https://tailwindcss.com) | 4.x | Utility-first CSS (v4 with CSS-first config) |
 | [Shadcn UI](https://ui.shadcn.com) | 4.x | Accessible component primitives |
-| [Radix UI](https://radix-ui.com) | 1.x | Headless accessible primitives |
-| [Lucide React](https://lucide.dev) | 1.x | Icon library |
-| [Turbopack](https://turbo.build/pack) | built-in | Dev server bundler |
 
 ### Backend — `apps/vera-api`
 
@@ -48,8 +44,7 @@ A full-stack monorepo starter built with **NX**, **Next.js 16**, **Elysia** (Bun
 | [pnpm](https://pnpm.io) | latest | Workspace package manager |
 | [TypeScript](https://typescriptlang.org) | 5.9.x | Strict mode across the stack |
 | [Vite](https://vitejs.dev) | 7.x | Library build tool |
-| [Vitest](https://vitest.dev) | 4.x | Unit testing for libraries |
-| [Jest](https://jestjs.io) | 30.x | Unit testing for apps |
+| [Vitest](https://vitest.dev) | 4.x | Unit testing |
 | [Playwright](https://playwright.dev) | latest | End-to-end testing |
 | [ESLint](https://eslint.org) | 9.x | Flat config linting |
 | [Prettier](https://prettier.io) | 3.x | Code formatting |
@@ -73,11 +68,9 @@ vera-monorepo/
 │   │
 │   ├── vera-ai-e2e/               # Playwright E2E tests for vera-ai
 │   │
-│   ├── vera-api/                  # Elysia API (runs on Bun)
-│   │   └── src/
-│   │       └── index.ts           # API entrypoint
-│   │
-│   └── vera-api-e2e/              # Jest E2E tests for vera-api
+│   └── vera-api/                  # Elysia API (runs on Bun)
+│       └── src/
+│           └── index.ts           # API entrypoint
 │
 ├── libs/                          # Shared workspace libraries
 │   ├── ui/                        # @vera-common/ui
@@ -266,10 +259,12 @@ pnpm shadcn add <component-name>
 
 ### Shadcn Components
 
-The workspace is pre-configured for Shadcn via `components.json`. New components are automatically added to `@vera-common/ui`:
+The workspace is pre-configured for Shadcn via `components.json` at the repository root. The configuration is compatible with any component source — the official [shadcn/ui registry](https://ui.shadcn.com/docs/components), third-party registries, and community registries all work out of the box.
+
+> **Always run the shadcn CLI from the workspace root.** The `components.json` at the root tells the CLI where to place files (`libs/ui/src/lib/`), which aliases to use, and which Tailwind config applies. Running it from inside a sub-directory will miss this config.
 
 ```sh
-# Add a single component
+# Add a single component (official registry)
 pnpm shadcn add button
 
 # Add multiple components
@@ -277,9 +272,14 @@ pnpm shadcn add dialog sheet command
 
 # Add all available components
 pnpm shadcn add --all
+
+# Add a component from a third-party / community registry URL
+pnpm shadcn add https://ui.aceternity.com/registry/moving-cards.json
 ```
 
 Components land in `libs/ui/src/lib/` and are immediately importable via `@vera-common/ui/<component-name>`.
+
+See the [shadcn CLI docs](https://ui.shadcn.com/docs/cli) and [registry docs](https://ui.shadcn.com/docs/registry) for the full list of options.
 
 ### E2E Test Projects
 
@@ -344,6 +344,58 @@ pnpm nx g ci-workflow
 
 ---
 
+## Elysia Tooling
+
+The workspace ships with a custom Nx plugin at `tools/elysia/` that auto-wires Elysia apps into the Nx task graph — no manual `project.json` target configuration needed.
+
+The plugin is **modelled after `@nx/next/plugin`**: it implements the `CreateNodesV2` API, globs for `package.json` files, detects projects that depend on `elysia`, and injects the three standard targets automatically.
+
+### How it works
+
+1. **Project detection** — scans every `package.json` in the workspace; skips `node_modules` and any project that does not list `elysia` as a dependency.
+2. **Target injection** — for every matched Elysia project three targets are registered in the Nx task graph:
+
+| Target | Command | Notes |
+| --- | --- | --- |
+| `dev` | `bun run --hot <entry>` | Hot-reload dev server, `continuous: true` |
+| `build` | `bun build --compile --minify-* --target bun --outfile dist/server <entry>` | Compiles to a standalone binary, cached, depends on `^build` |
+| `start` | `./dist/server` | Runs the compiled binary, depends on `build` |
+
+3. **Entry point resolution** — prefers `src/main.ts`; falls back to `src/index.ts`.
+4. **Result caching** — target configs are hashed and stored in `workspaceDataDirectory` so repeated Nx runs skip recalculation.
+
+### Plugin options (`nx.json`)
+
+```json
+{
+  "plugin": "@vera-monorepo/elysia/plugin",
+  "options": {
+    "devTargetName": "dev",
+    "buildTargetName": "build",
+    "startTargetName": "start",
+    "port": 3000
+  }
+}
+```
+
+All option keys are optional — the defaults above apply when omitted.
+
+### Plugin structure
+
+```text
+tools/elysia/
+├── src/
+│   ├── plugins/
+│   │   ├── plugin.ts          # CreateNodesV2 implementation
+│   │   └── plugin.spec.ts     # Vitest unit tests
+│   └── executors/
+│       └── echo/              # Example custom executor
+├── plugin.ts                  # Public entry point
+└── executors.json             # Executor manifest
+```
+
+---
+
 ## Path Aliases
 
 Defined in `tsconfig.base.json`. All source files in `libs/` are available with zero build step in development.
@@ -366,85 +418,3 @@ import { useIsMobile } from '@vera-common/hooks'
 import { something } from '@vera-common/lib'
 ```
 
----
-
-## UI Components (Shadcn)
-
-All 50+ Shadcn components are available in `@vera-common/ui`. The library uses:
-
-- **Radix UI** primitives for accessibility and behaviour
-- **Tailwind CSS v4** for styling (CSS-first config in `libs/ui/src/styles/globals.css`)
-- **CVA** (class-variance-authority) for variant management
-- **`cn()`** from `@vera-common/utils` for conditional class merging
-
-### Available components
-
-| Category | Components |
-| --- | --- |
-| **Layout** | `Separator`, `ScrollArea`, `ResizablePanelGroup`, `AspectRatio` |
-| **Navigation** | `Breadcrumb`, `NavigationMenu`, `Pagination`, `Tabs`, `Sidebar` |
-| **Overlay** | `Dialog`, `AlertDialog`, `Sheet`, `Drawer`, `Popover`, `HoverCard`, `Tooltip` |
-| **Form** | `Button`, `Input`, `Textarea`, `Select`, `Checkbox`, `RadioGroup`, `Switch`, `Slider`, `Calendar`, `InputOTP` |
-| **Data Display** | `Table`, `Card`, `Badge`, `Avatar`, `Progress`, `Skeleton`, `Chart` |
-| **Feedback** | `Alert`, `Sonner` (toast), `Spinner` |
-| **Disclosure** | `Accordion`, `Collapsible` |
-| **Command** | `Command`, `Combobox` |
-| **Menu** | `DropdownMenu`, `ContextMenu`, `Menubar` |
-| **Typography** | `Label`, `Kbd`, `Empty` |
-| **Utility** | `Toggle`, `ToggleGroup`, `ButtonGroup`, `Carousel` |
-
-### Theming
-
-The global stylesheet at `libs/ui/src/styles/globals.css` defines all CSS variables. CSS variables are exposed as Tailwind utilities via `@theme inline`:
-
-```css
-/* Use as Tailwind classes */
-bg-background    text-foreground
-bg-primary       text-primary-foreground
-bg-muted         text-muted-foreground
-bg-card          text-card-foreground
-border-border    ring-ring
-```
-
-Dark mode uses the `.dark` class strategy and the `@custom-variant dark` Tailwind v4 variant.
-
----
-
-## Code Style & Conventions
-
-### TypeScript
-
-- Strict mode enabled everywhere (`strict: true`, `noImplicitReturns`, `noUnusedLocals`)
-- `isolatedModules: true` — no type-only exports without `export type`
-- Path aliases via `tsconfig.base.json` — never use relative `../../` imports for cross-library imports
-
-### Component conventions
-
-- Server Components by default in Next.js — add `"use client"` only when needed
-- Client components that are co-located next to a Server Component page should be prefixed with `_` (e.g. `_components.tsx`)
-- Use `cn()` for conditional classnames, never string concatenation
-- Import shadcn components individually from `@vera-common/ui/<name>`, not from the barrel `@vera-common/ui`
-
-### Module boundaries
-
-NX enforces module boundaries via `@nx/enforce-module-boundaries` in ESLint. Libraries should not import from apps. Apps import from libraries via the `@vera-common/*` aliases.
-
-### Testing
-
-| Layer | Tool | Location |
-| --- | --- | --- |
-| Unit (libraries) | Vitest | `libs/*/src/**/*.spec.ts` |
-| Unit (apps) | Jest | `apps/*/src/**/*.spec.ts` |
-| E2E (frontend) | Playwright | `apps/vera-ai-e2e/src/` |
-| E2E (backend) | Jest | `apps/vera-api-e2e/src/` |
-
-```sh
-# Run all tests
-pnpm nx run-many -t test
-
-# Watch mode for a library
-pnpm nx test @vera-common/ui --watch
-
-# Coverage report
-pnpm nx test @vera-common/ui --coverage
-```
