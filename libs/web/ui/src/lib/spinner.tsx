@@ -1,4 +1,4 @@
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 import { Loader2Icon } from 'lucide-react';
 
 function Spinner({ className, ...props }: React.ComponentProps<'svg'>) {

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 
 /**
  * InteractiveGridPattern is a component that renders a grid pattern with interactive squares.

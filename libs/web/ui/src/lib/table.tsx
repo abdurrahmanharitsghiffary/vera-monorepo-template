@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 
 function Table({ className, ...props }: React.ComponentProps<'table'>) {
   return (

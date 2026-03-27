@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Menubar as MenubarPrimitive } from 'radix-ui';
 
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 import { CheckIcon, ChevronRightIcon } from 'lucide-react';
 
 function Menubar({

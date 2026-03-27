@@ -1,5 +1,5 @@
 {
-  "name": "@vera-common/utils",
+  "name": "@vera/common-utils",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/lib/index.js",

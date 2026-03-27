@@ -2,7 +2,7 @@
 
 import * as ResizablePrimitive from 'react-resizable-panels';
 
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 
 function ResizablePanelGroup({
   className,

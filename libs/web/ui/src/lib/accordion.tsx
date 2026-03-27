@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Accordion as AccordionPrimitive } from 'radix-ui';
 
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 
 function Accordion({

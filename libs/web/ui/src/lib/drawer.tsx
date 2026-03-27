@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Drawer as DrawerPrimitive } from 'vaul';
 
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 
 function Drawer({
   ...props

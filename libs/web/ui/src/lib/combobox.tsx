@@ -3,14 +3,14 @@
 import * as React from 'react';
 import { Combobox as ComboboxPrimitive } from '@base-ui/react';
 
-import { cn } from '@vera-common/utils';
-import { Button } from '@vera-common/ui/button';
+import { cn } from '@vera/common-utils';
+import { Button } from '@vera/web-ui/button';
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from '@vera-common/ui/input-group';
+} from '@vera/web-ui/input-group';
 import { ChevronDownIcon, XIcon, CheckIcon } from 'lucide-react';
 
 const Combobox = ComboboxPrimitive.Root;

@@ -1,6 +1,6 @@
 import { type ComponentPropsWithoutRef } from 'react';
 
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 
 interface MarqueeProps extends ComponentPropsWithoutRef<'div'> {
   /**

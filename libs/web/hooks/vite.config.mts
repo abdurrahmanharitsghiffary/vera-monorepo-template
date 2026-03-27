@@ -32,7 +32,7 @@ export default defineConfig(() => ({
       entry: {
         index: 'src/lib/index.ts',
       },
-      name: '@vera-common/hooks',
+      name: '@vera/react-hooks',
       fileName: (format, entryName) => `${entryName}.js`,
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
@@ -44,7 +44,7 @@ export default defineConfig(() => ({
     },
   },
   test: {
-    name: '@vera-common/hooks',
+    name: '@vera/react-hooks',
     watch: false,
     globals: true,
     environment: 'jsdom',

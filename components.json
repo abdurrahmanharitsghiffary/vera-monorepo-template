@@ -11,11 +11,11 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@vera-common/ui",
-    "utils": "@vera-common/utils",
-    "ui": "@vera-common/ui",
-    "lib": "@vera-common/lib",
-    "hooks": "@vera-common/hooks"
+    "components": "@vera/web-ui",
+    "utils": "@vera/common-utils",
+    "ui": "@vera/web-ui",
+    "lib": "@vera/web-lib",
+    "hooks": "@vera/react-hooks"
   },
   "registries": {
     "@magicui": "https://magicui.design/r/{name}"

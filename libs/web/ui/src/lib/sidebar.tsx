@@ -4,24 +4,20 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Slot } from 'radix-ui';
 
-import { useIsMobile } from '@vera-common/hooks/use-mobile';
-import { cn } from '@vera-common/utils';
-import { Button } from '@vera-common/ui/button';
-import { Input } from '@vera-common/ui/input';
-import { Separator } from '@vera-common/ui/separator';
+import { useIsMobile } from '@vera/react-hooks/use-mobile';
+import { cn } from '@vera/common-utils';
+import { Button } from '@vera/web-ui/button';
+import { Input } from '@vera/web-ui/input';
+import { Separator } from '@vera/web-ui/separator';
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from '@vera-common/ui/sheet';
-import { Skeleton } from '@vera-common/ui/skeleton';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@vera-common/ui/tooltip';
+} from '@vera/web-ui/sheet';
+import { Skeleton } from '@vera/web-ui/skeleton';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@vera/web-ui/tooltip';
 import { PanelLeftIcon } from 'lucide-react';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';

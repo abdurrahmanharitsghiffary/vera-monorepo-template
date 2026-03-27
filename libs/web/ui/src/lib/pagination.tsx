@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { cn } from '@vera-common/utils';
-import { Button } from '@vera-common/ui/button';
+import { cn } from '@vera/common-utils';
+import { Button } from '@vera/web-ui/button';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,

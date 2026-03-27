@@ -3,29 +3,29 @@
 import * as React from 'react';
 import { flushSync } from 'react-dom';
 import { useTheme } from 'next-themes';
-import { Button } from '@vera-common/ui/button';
-import { Badge } from '@vera-common/ui/badge';
-import { Avatar, AvatarFallback } from '@vera-common/ui/avatar';
-import { Separator } from '@vera-common/ui/separator';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@vera-common/ui/tabs';
+import { Button } from '@vera/web-ui/button';
+import { Badge } from '@vera/web-ui/badge';
+import { Avatar, AvatarFallback } from '@vera/web-ui/avatar';
+import { Separator } from '@vera/web-ui/separator';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@vera/web-ui/tabs';
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from '@vera-common/ui/accordion';
+} from '@vera/web-ui/accordion';
 import {
   Tooltip,
   TooltipProvider,
   TooltipTrigger,
   TooltipContent,
-} from '@vera-common/ui/tooltip';
-import { Kbd } from '@vera-common/ui/kbd';
-import { cn } from '@vera-common/utils';
-import { AuroraText } from '@vera-common/ui/aurora-text';
-import { IconCloud } from '@vera-common/ui/icon-cloud';
-import { InteractiveGridPattern } from '@vera-common/ui/interactive-grid-pattern';
-import { Marquee } from '@vera-common/ui/marquee';
+} from '@vera/web-ui/tooltip';
+import { Kbd } from '@vera/web-ui/kbd';
+import { cn } from '@vera/common-utils';
+import { AuroraText } from '@vera/web-ui/aurora-text';
+import { IconCloud } from '@vera/web-ui/icon-cloud';
+import { InteractiveGridPattern } from '@vera/web-ui/interactive-grid-pattern';
+import { Marquee } from '@vera/web-ui/marquee';
 import {
   ZapIcon,
   ShieldCheckIcon,
@@ -102,7 +102,9 @@ function ThemeToggleButton({ className }: { className?: string }) {
   // Avoid hydration mismatch — render a placeholder until mounted
   if (!mounted) {
     return (
-      <div className={cn('h-9 w-9 rounded-lg border border-border/70', className)} />
+      <div
+        className={cn('h-9 w-9 rounded-lg border border-border/70', className)}
+      />
     );
   }
 
@@ -732,7 +734,7 @@ export default async function Page() {
   client: `// components/counter.tsx — Client Component
 "use client"
 import { useState } from 'react'
-import { Button } from '@vera-common/ui/button'
+import { Button } from '@vera/web-ui/button'
 
 export function Counter() {
   const [count, setCount] = useState(0)

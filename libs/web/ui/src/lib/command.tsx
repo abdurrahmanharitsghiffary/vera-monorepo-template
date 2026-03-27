@@ -3,15 +3,15 @@
 import * as React from 'react';
 import { Command as CommandPrimitive } from 'cmdk';
 
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@vera-common/ui/dialog';
-import { InputGroup, InputGroupAddon } from '@vera-common/ui/input-group';
+} from '@vera/web-ui/dialog';
+import { InputGroup, InputGroupAddon } from '@vera/web-ui/input-group';
 import { SearchIcon, CheckIcon } from 'lucide-react';
 
 function Command({

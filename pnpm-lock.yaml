@@ -505,7 +505,7 @@ importers:
 
   apps/vera-ai:
     dependencies:
-      '@vera-common/ui':
+      '@vera/web-ui':
         specifier: workspace:*
         version: link:../../libs/web/ui
       next-themes:

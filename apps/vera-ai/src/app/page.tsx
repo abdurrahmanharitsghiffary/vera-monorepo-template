@@ -1,5 +1,5 @@
-import { Badge } from "@vera-common/ui/badge";
-import { Button } from "@vera-common/ui/button";
+import { Badge } from '@vera/web-ui/badge';
+import { Button } from '@vera/web-ui/button';
 import {
   Navbar,
   HeroSection,
@@ -12,14 +12,13 @@ import {
   TestimonialsSection,
   FaqSection,
   Footer,
-} from "./_components";
+} from './_components';
 
 export default function HomePage() {
   return (
     <>
       <Navbar />
       <main className="min-h-screen bg-background text-foreground font-sans overflow-x-hidden">
-
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <HeroSection />
 
@@ -28,7 +27,10 @@ export default function HomePage() {
 
         {/* ── Stats ─────────────────────────────────────────────────── */}
         <div className="relative border-b border-border overflow-hidden">
-          <div className="bg-stripes pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
+          <div
+            className="bg-stripes pointer-events-none absolute inset-0 opacity-60"
+            aria-hidden="true"
+          />
           <div className="relative bg-muted/30 py-14">
             <StatsBar />
           </div>
@@ -60,8 +62,14 @@ export default function HomePage() {
 
         {/* ── Features ──────────────────────────────────────────────── */}
         <div className="relative border-t border-border overflow-hidden">
-          <div className="bg-stripes pointer-events-none absolute inset-0" aria-hidden="true" />
-          <div className="pointer-events-none absolute inset-0 bg-muted/40" aria-hidden="true" />
+          <div
+            className="bg-stripes pointer-events-none absolute inset-0"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute inset-0 bg-muted/40"
+            aria-hidden="true"
+          />
           <section className="relative max-w-7xl mx-auto px-6 py-28">
             <div className="text-center mb-16">
               <Badge
@@ -128,8 +136,8 @@ export default function HomePage() {
                 className="absolute inset-0"
                 style={{
                   backgroundImage:
-                    "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.12) 1px, transparent 0)",
-                  backgroundSize: "28px 28px",
+                    'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.12) 1px, transparent 0)',
+                  backgroundSize: '28px 28px',
                 }}
               />
             </div>
@@ -139,7 +147,7 @@ export default function HomePage() {
               aria-hidden="true"
               style={{
                 background:
-                  "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,255,255,0.1), transparent)",
+                  'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,255,255,0.1), transparent)',
               }}
             />
 

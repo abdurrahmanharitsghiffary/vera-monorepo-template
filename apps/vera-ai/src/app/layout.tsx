@@ -1,4 +1,4 @@
-import '@vera-common/styles/globals.css';
+import '@vera/web-styles/globals.css';
 import { Providers } from './providers';
 
 export const metadata = {

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@vera-common/ui": "workspace:*",
+    "@vera/web-ui": "workspace:*",
     "next-themes": "catalog:frontend"
   }
 }

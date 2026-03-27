@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Label as LabelPrimitive } from 'radix-ui';
 
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 
 function Label({
   className,

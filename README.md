@@ -73,18 +73,18 @@ vera-monorepo/
 │           └── index.ts           # API entrypoint
 │
 ├── libs/                          # Shared workspace libraries
-│   ├── ui/                        # @vera-common/ui
+│   ├── ui/                        # @vera/web-ui
 │   │   └── src/
 │   │       ├── lib/               # Shadcn components (50+ components)
 │   │       └── styles/            # globals.css (Tailwind v4 entry)
 │   │
-│   ├── hooks/                     # @vera-common/hooks
+│   ├── hooks/                     # @vera/react-hooks
 │   │   └── src/lib/               # Shared React hooks
 │   │
-│   ├── utils/                     # @vera-common/utils
+│   ├── utils/                     # @vera/common-utils
 │   │   └── src/lib/               # Shared utility functions (cn, etc.)
 │   │
-│   └── lib/                       # @vera-common/lib
+│   └── lib/                       # @vera/web-lib
 │       └── src/lib/               # Shared business logic helpers
 │
 ├── tools/                         # Workspace tooling
@@ -131,11 +131,11 @@ apps/vera-ai/src/
 
 | Package | Path | Import |
 | --- | --- | --- |
-| UI Components | `libs/ui` | `@vera-common/ui` or `@vera-common/ui/<component>` |
-| Global Styles | `libs/ui/src/styles` | `@vera-common/styles/globals.css` |
-| React Hooks | `libs/hooks` | `@vera-common/hooks` |
-| Utilities | `libs/utils` | `@vera-common/utils` |
-| Shared Logic | `libs/lib` | `@vera-common/lib` |
+| UI Components | `libs/ui` | `@vera/web-ui` or `@vera/web-ui/<component>` |
+| Global Styles | `libs/ui/src/styles` | `@vera/web-styles/globals.css` |
+| React Hooks | `libs/hooks` | `@vera/react-hooks` |
+| Utilities | `libs/utils` | `@vera/common-utils` |
+| Shared Logic | `libs/lib` | `@vera/web-lib` |
 
 All packages resolve to source files in development via the `@vera-monorepo/source` custom condition in `tsconfig.base.json` — no build step needed during local dev.
 
@@ -195,7 +195,7 @@ All tasks run through NX. **Never** call underlying tools (e.g. `next build`, `v
 pnpm nx run-many -t build
 
 # Run a target on specific projects
-pnpm nx run-many -t test -p vera-ai,@vera-common/ui
+pnpm nx run-many -t test -p vera-ai,@vera/web-ui
 
 # Run only on projects affected by current changes (great for CI)
 pnpm nx affected -t build
@@ -207,7 +207,7 @@ pnpm nx affected -t lint
 
 ```sh
 pnpm nx show project vera-ai
-pnpm nx show project @vera-common/ui
+pnpm nx show project @vera/web-ui
 ```
 
 ### Visualize the project dependency graph
@@ -277,7 +277,7 @@ pnpm shadcn add --all
 pnpm shadcn add https://ui.aceternity.com/registry/moving-cards.json
 ```
 
-Components land in `libs/ui/src/lib/` and are immediately importable via `@vera-common/ui/<component-name>`.
+Components land in `libs/ui/src/lib/` and are immediately importable via `@vera/web-ui/<component-name>`.
 
 See the [shadcn CLI docs](https://ui.shadcn.com/docs/cli) and [registry docs](https://ui.shadcn.com/docs/registry) for the full list of options.
 
@@ -402,19 +402,19 @@ Defined in `tsconfig.base.json`. All source files in `libs/` are available with 
 
 ```ts
 // UI components — import individual files (tree-shakeable)
-import { Button } from '@vera-common/ui/button'
-import { Card, CardContent } from '@vera-common/ui/card'
+import { Button } from '@vera/web-ui/button'
+import { Card, CardContent } from '@vera/web-ui/card'
 
 // Global styles
-import '@vera-common/styles/globals.css'
+import '@vera/web-styles/globals.css'
 
 // Utilities
-import { cn } from '@vera-common/utils'
+import { cn } from '@vera/common-utils'
 
 // Hooks
-import { useIsMobile } from '@vera-common/hooks'
+import { useIsMobile } from '@vera/react-hooks'
 
 // Shared business logic
-import { something } from '@vera-common/lib'
+import { something } from '@vera/web-lib'
 ```
 

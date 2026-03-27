@@ -8,8 +8,8 @@ import {
   type Locale,
 } from 'react-day-picker';
 
-import { cn } from '@vera-common/utils';
-import { Button, buttonVariants } from '@vera-common/ui/button';
+import { cn } from '@vera/common-utils';
+import { Button, buttonVariants } from '@vera/web-ui/button';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,

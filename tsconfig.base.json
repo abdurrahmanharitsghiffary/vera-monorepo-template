@@ -19,15 +19,15 @@
     "customConditions": ["@vera-monorepo/source"],
     "rootDir": ".",
     "paths": {
-      "@vera-common/ui": ["./libs/web/ui/src/lib"],
-      "@vera-common/ui/*": ["./libs/web/ui/src/lib/*"],
-      "@vera-common/styles/*": ["./libs/web/ui/src/styles/*"],
-      "@vera-common/utils": ["./libs/utils/src/lib"],
-      "@vera-common/utils/*": ["./libs/utils/src/lib/*"],
-      "@vera-common/hooks": ["./libs/web/hooks/src/lib"],
-      "@vera-common/hooks/*": ["./libs/web/hooks/src/lib/*"],
-      "@vera-common/lib": ["./libs/web/lib/src/lib"],
-      "@vera-common/lib/*": ["./libs/web/lib/src/lib/*"]
+      "@vera/web-ui": ["./libs/web/ui/src/lib"],
+      "@vera/web-ui/*": ["./libs/web/ui/src/lib/*"],
+      "@vera/web-styles/*": ["./libs/web/ui/src/styles/*"],
+      "@vera/common-utils": ["./libs/utils/src/lib"],
+      "@vera/common-utils/*": ["./libs/utils/src/lib/*"],
+      "@vera/react-hooks": ["./libs/web/hooks/src/lib"],
+      "@vera/react-hooks/*": ["./libs/web/hooks/src/lib/*"],
+      "@vera/web-lib": ["./libs/web/lib/src/lib"],
+      "@vera/web-lib/*": ["./libs/web/lib/src/lib/*"]
     }
   }
 }

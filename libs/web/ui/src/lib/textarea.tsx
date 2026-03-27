@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 
 function Textarea({ className, ...props }: React.ComponentProps<'textarea'>) {
   return (

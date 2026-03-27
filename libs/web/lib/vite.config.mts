@@ -33,7 +33,7 @@ export default defineConfig(() => ({
         index: 'src/index.ts',
         server: 'src/server.ts',
       },
-      name: '@vera-common/lib',
+      name: '@vera/web-lib',
       fileName: (format, entryName) => `${entryName}.js`,
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
@@ -45,7 +45,7 @@ export default defineConfig(() => ({
     },
   },
   test: {
-    name: '@vera-common/lib',
+    name: '@vera/web-lib',
     watch: false,
     globals: true,
     environment: 'jsdom',

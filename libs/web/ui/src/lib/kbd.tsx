@@ -1,4 +1,4 @@
-import { cn } from '@vera-common/utils';
+import { cn } from '@vera/common-utils';
 
 function Kbd({ className, ...props }: React.ComponentProps<'kbd'>) {
   return (

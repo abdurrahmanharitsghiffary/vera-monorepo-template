@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { Dialog as DialogPrimitive } from 'radix-ui';
 
-import { cn } from '@vera-common/utils';
-import { Button } from '@vera-common/ui/button';
+import { cn } from '@vera/common-utils';
+import { Button } from '@vera/web-ui/button';
 import { XIcon } from 'lucide-react';
 
 function Dialog({
