@@ -19,15 +19,15 @@
     "customConditions": ["@vera-monorepo/source"],
     "rootDir": ".",
     "paths": {
-      "@vera-common/ui": ["./libs/ui/src/lib"],
-      "@vera-common/ui/*": ["./libs/ui/src/lib/*"],
-      "@vera-common/styles/*": ["./libs/ui/src/styles/*"],
+      "@vera-common/ui": ["./libs/web/ui/src/lib"],
+      "@vera-common/ui/*": ["./libs/web/ui/src/lib/*"],
+      "@vera-common/styles/*": ["./libs/web/ui/src/styles/*"],
       "@vera-common/utils": ["./libs/utils/src/lib"],
       "@vera-common/utils/*": ["./libs/utils/src/lib/*"],
-      "@vera-common/hooks": ["./libs/hooks/src/lib"],
-      "@vera-common/hooks/*": ["./libs/hooks/src/lib/*"],
-      "@vera-common/lib": ["./libs/lib/src/lib"],
-      "@vera-common/lib/*": ["./libs/lib/src/lib/*"]
+      "@vera-common/hooks": ["./libs/web/hooks/src/lib"],
+      "@vera-common/hooks/*": ["./libs/web/hooks/src/lib/*"],
+      "@vera-common/lib": ["./libs/web/lib/src/lib"],
+      "@vera-common/lib/*": ["./libs/web/lib/src/lib/*"]
     }
   }
 }

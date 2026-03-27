@@ -56,7 +56,7 @@
       "path": "../../libs/utils"
     },
     {
-      "path": "../../libs/ui"
+      "path": "../../libs/web/ui"
     },
     {
       "path": "./tsconfig.spec.json"

@@ -16,16 +16,16 @@
       "path": "./apps/vera-api"
     },
     {
-      "path": "./libs/ui"
-    },
-    {
       "path": "./libs/utils"
     },
     {
-      "path": "./libs/hooks"
+      "path": "./libs/web/hooks"
     },
     {
-      "path": "./libs/lib"
+      "path": "./libs/web/lib"
+    },
+    {
+      "path": "./libs/web/ui"
     }
   ]
 }

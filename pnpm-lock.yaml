@@ -507,7 +507,7 @@ importers:
     dependencies:
       '@vera-common/ui':
         specifier: workspace:*
-        version: link:../../libs/ui
+        version: link:../../libs/web/ui
       next-themes:
         specifier: catalog:frontend
         version: 0.4.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -524,13 +524,13 @@ importers:
         specifier: catalog:backend
         version: 1.3.11
 
-  libs/hooks: {}
-
-  libs/lib: {}
-
-  libs/ui: {}
-
   libs/utils: {}
+
+  libs/web/hooks: {}
+
+  libs/web/lib: {}
+
+  libs/web/ui: {}
 
   tools/elysia:
     dependencies:
