@@ -1,5 +1,5 @@
 {
-  "name": "@vera-monorepo/vera-api",
+  "name": "@vera/vera-api",
   "projectType": "application",
   "root": "apps/vera-api",
   "sourceRoot": "apps/vera-api/src",

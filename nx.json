@@ -42,7 +42,7 @@
       }
     },
     {
-      "plugin": "@vera-monorepo/elysia/plugin",
+      "plugin": "@vera/elysia-tooling/plugin",
       "options": {
         "devTargetName": "dev",
         "buildTargetName": "build",

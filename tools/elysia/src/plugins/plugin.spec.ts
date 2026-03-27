@@ -19,7 +19,7 @@ vi.mock('nx/src/devkit-internals', () => ({
 
 import { createNodesV2 } from './plugin';
 
-describe('@vera-monorepo/elysia plugin', () => {
+describe('@vera/elysia-tooling plugin', () => {
   let createNodesFunction = createNodesV2[1];
   let context: CreateNodesContextV2;
   let tempDir: string;
@@ -130,7 +130,10 @@ describe('@vera-monorepo/elysia plugin', () => {
     it('should detect elysia in devDependencies', async () => {
       writeFileSync(
         join(tempDir, 'my-app', 'package.json'),
-        JSON.stringify({ name: 'my-app', devDependencies: { elysia: '^1.0.0' } }),
+        JSON.stringify({
+          name: 'my-app',
+          devDependencies: { elysia: '^1.0.0' },
+        }),
       );
 
       const nodes = await createNodesFunction(

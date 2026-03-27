@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`@vera-monorepo/elysia plugin > integrated projects > should create nodes 1`] = `
+exports[`@vera/elysia-tooling plugin > integrated projects > should create nodes 1`] = `
 [
   [
     "my-app/package.json",
@@ -59,7 +59,7 @@ exports[`@vera-monorepo/elysia plugin > integrated projects > should create node
 ]
 `;
 
-exports[`@vera-monorepo/elysia plugin > root projects > should create nodes with custom target names 1`] = `
+exports[`@vera/elysia-tooling plugin > root projects > should create nodes with custom target names 1`] = `
 [
   [
     "package.json",
@@ -118,7 +118,7 @@ exports[`@vera-monorepo/elysia plugin > root projects > should create nodes with
 ]
 `;
 
-exports[`@vera-monorepo/elysia plugin > root projects > should create nodes with default target names 1`] = `
+exports[`@vera/elysia-tooling plugin > root projects > should create nodes with default target names 1`] = `
 [
   [
     "package.json",

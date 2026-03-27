@@ -1,10 +1,10 @@
 {
-  "name": "@vera-monorepo/vera-ai-e2e",
+  "name": "@vera/vera-ai-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@vera-monorepo/vera-ai"
+      "@vera/vera-ai"
     ]
   }
 }

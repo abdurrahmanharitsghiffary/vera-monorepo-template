@@ -4,7 +4,7 @@ export default defineConfig(() => ({
   root: __dirname,
   cacheDir: '../../node_modules/.vite/apps/vera-api',
   test: {
-    name: '@vera-monorepo/vera-api',
+    name: '@vera/vera-api',
     watch: false,
     globals: true,
     environment: 'jsdom',

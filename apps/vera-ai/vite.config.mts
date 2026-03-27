@@ -9,7 +9,7 @@ export default defineConfig(() => ({
   //  plugins: [],
   // },
   test: {
-    name: '@vera-monorepo/vera-ai',
+    name: '@vera/vera-ai',
     watch: false,
     globals: true,
     environment: 'jsdom',

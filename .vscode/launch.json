@@ -4,9 +4,9 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug @vera-monorepo/vera-api with Nx",
+      "name": "Debug @vera/vera-api with Nx",
       "runtimeExecutable": "pnpm exec",
-      "runtimeArgs": ["nx", "serve", "@vera-monorepo/vera-api"],
+      "runtimeArgs": ["nx", "serve", "@vera/vera-api"],
       "env": {
         "NODE_OPTIONS": "--inspect=9229"
       },

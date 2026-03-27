@@ -4,7 +4,7 @@ export default defineConfig(() => ({
   root: __dirname,
   cacheDir: '../../node_modules/.vite/tools/elysia',
   test: {
-    name: '@vera-monorepo/elysia',
+    name: '@vera/elysia-tooling',
     watch: false,
     globals: true,
     environment: 'jsdom',

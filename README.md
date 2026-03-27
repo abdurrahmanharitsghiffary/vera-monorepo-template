@@ -368,7 +368,7 @@ The plugin is **modelled after `@nx/next/plugin`**: it implements the `CreateNod
 
 ```json
 {
-  "plugin": "@vera-monorepo/elysia/plugin",
+  "plugin": "@vera/elysia-tooling/plugin",
   "options": {
     "devTargetName": "dev",
     "buildTargetName": "build",
