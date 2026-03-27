@@ -1,0 +1,31 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/vera-ai-e2e"
+    },
+    {
+      "path": "./apps/vera-ai"
+    },
+    {
+      "path": "./tools/elysia"
+    },
+    {
+      "path": "./apps/vera-api"
+    },
+    {
+      "path": "./libs/ui"
+    },
+    {
+      "path": "./libs/utils"
+    },
+    {
+      "path": "./libs/hooks"
+    },
+    {
+      "path": "./libs/lib"
+    }
+  ]
+}

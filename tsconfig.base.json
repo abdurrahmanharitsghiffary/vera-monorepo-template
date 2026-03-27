@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "importHelpers": true,
+    "isolatedModules": true,
+    "lib": ["es2022"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2022",
+    "customConditions": ["@vera-monorepo/source"],
+    "rootDir": ".",
+    "paths": {
+      "@vera-common/ui": ["./libs/ui/src/lib"],
+      "@vera-common/ui/*": ["./libs/ui/src/lib/*"],
+      "@vera-common/styles/*": ["./libs/ui/src/styles/*"],
+      "@vera-common/utils": ["./libs/utils/src/lib"],
+      "@vera-common/utils/*": ["./libs/utils/src/lib/*"],
+      "@vera-common/hooks": ["./libs/hooks/src/lib"],
+      "@vera-common/hooks/*": ["./libs/hooks/src/lib/*"],
+      "@vera-common/lib": ["./libs/lib/src/lib"],
+      "@vera-common/lib/*": ["./libs/lib/src/lib/*"]
+    }
+  }
+}

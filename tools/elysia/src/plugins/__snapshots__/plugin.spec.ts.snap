@@ -1,0 +1,178 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`@vera-monorepo/elysia plugin > integrated projects > should create nodes 1`] = `
+[
+  [
+    "my-app/package.json",
+    {
+      "projects": {
+        "my-app": {
+          "root": "my-app",
+          "targets": {
+            "build": {
+              "cache": true,
+              "command": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile dist/server src/index.ts",
+              "dependsOn": [
+                "^build",
+              ],
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "elysia",
+                  ],
+                },
+              ],
+              "options": {
+                "cwd": "my-app",
+              },
+              "outputs": [
+                "{workspaceRoot}/my-app/dist/server",
+              ],
+            },
+            "dev": {
+              "command": "bun run --hot src/index.ts",
+              "continuous": true,
+              "options": {
+                "cwd": "my-app",
+                "env": {
+                  "PORT": "3000",
+                },
+              },
+            },
+            "start": {
+              "command": "./dist/server",
+              "continuous": true,
+              "dependsOn": [
+                "build",
+              ],
+              "options": {
+                "cwd": "my-app",
+              },
+            },
+          },
+        },
+      },
+    },
+  ],
+]
+`;
+
+exports[`@vera-monorepo/elysia plugin > root projects > should create nodes with custom target names 1`] = `
+[
+  [
+    "package.json",
+    {
+      "projects": {
+        ".": {
+          "root": ".",
+          "targets": {
+            "my-build": {
+              "cache": true,
+              "command": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile dist/server src/index.ts",
+              "dependsOn": [
+                "^build",
+              ],
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "elysia",
+                  ],
+                },
+              ],
+              "options": {
+                "cwd": ".",
+              },
+              "outputs": [
+                "{workspaceRoot}/./dist/server",
+              ],
+            },
+            "my-dev": {
+              "command": "bun run --hot src/index.ts",
+              "continuous": true,
+              "options": {
+                "cwd": ".",
+                "env": {
+                  "PORT": "3000",
+                },
+              },
+            },
+            "my-start": {
+              "command": "./dist/server",
+              "continuous": true,
+              "dependsOn": [
+                "my-build",
+              ],
+              "options": {
+                "cwd": ".",
+              },
+            },
+          },
+        },
+      },
+    },
+  ],
+]
+`;
+
+exports[`@vera-monorepo/elysia plugin > root projects > should create nodes with default target names 1`] = `
+[
+  [
+    "package.json",
+    {
+      "projects": {
+        ".": {
+          "root": ".",
+          "targets": {
+            "build": {
+              "cache": true,
+              "command": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile dist/server src/index.ts",
+              "dependsOn": [
+                "^build",
+              ],
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "elysia",
+                  ],
+                },
+              ],
+              "options": {
+                "cwd": ".",
+              },
+              "outputs": [
+                "{workspaceRoot}/./dist/server",
+              ],
+            },
+            "dev": {
+              "command": "bun run --hot src/index.ts",
+              "continuous": true,
+              "options": {
+                "cwd": ".",
+                "env": {
+                  "PORT": "3000",
+                },
+              },
+            },
+            "start": {
+              "command": "./dist/server",
+              "continuous": true,
+              "dependsOn": [
+                "build",
+              ],
+              "options": {
+                "cwd": ".",
+              },
+            },
+          },
+        },
+      },
+    },
+  ],
+]
+`;

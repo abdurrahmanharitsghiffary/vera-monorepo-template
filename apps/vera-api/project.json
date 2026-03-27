@@ -1,0 +1,20 @@
+{
+  "name": "@vera-monorepo/vera-api",
+  "projectType": "application",
+  "root": "apps/vera-api",
+  "sourceRoot": "apps/vera-api/src",
+  "targets": {
+    "dev": {
+      "command": "bun run --hot src/index.ts",
+      "options": { "cwd": "apps/vera-api" }
+    },
+    "build": {
+      "command": "bun build src/index.ts --outdir=../../dist/apps/vera-api --target=bun",
+      "options": { "cwd": "apps/vera-api" }
+    },
+    "start": {
+      "command": "bun run src/index.ts",
+      "options": { "cwd": "apps/vera-api" }
+    }
+  }
+}

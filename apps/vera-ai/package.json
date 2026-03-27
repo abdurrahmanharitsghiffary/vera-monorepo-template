@@ -1,0 +1,9 @@
+{
+  "name": "@vera-monorepo/vera-ai",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@vera-common/ui": "workspace:*",
+    "next-themes": "catalog:frontend"
+  }
+}
